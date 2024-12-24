@@ -9,7 +9,7 @@
       <div class="flex min-h-0 flex-1 flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
-            <h1 class="text-xl font-bold dark:text-white">Mgoods FBS</h1>
+            <h1 class="text-xl font-bold dark:text-white">EMU Cargo</h1>
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
             <router-link
@@ -41,9 +41,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { HomeIcon, ShoppingCartIcon, CurrencyDollarIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon, ShoppingCartIcon, UserGroupIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   isOpen: Boolean,
@@ -57,7 +56,7 @@ const route = useRoute()
 const menuItems = [
   { name: 'Dashboard', path: '/dashboard', icon: HomeIcon },
   { name: 'Orders', path: '/orders', icon: ShoppingCartIcon },
-  { name: 'Finance', path: '/finance', icon: CurrencyDollarIcon }
+  { name: 'Clients', path: '/clients', icon: UserGroupIcon }
 ]
 
 const isActive = (path) => route.path === path

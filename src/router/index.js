@@ -4,7 +4,7 @@ import RegisterPage from '@/pages/auth/RegisterPage.vue'
 import ResetPasswordPage from '@/pages/auth/ResetPasswordPage.vue'
 import DashboardPage from '@/pages/DashboardPage.vue'
 import OrdersPage from '@/pages/OrdersPage.vue'
-import FinancePage from '@/pages/FinancePage.vue'
+import ClientsPage from '@/pages/ClientsPage.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 function isAuthenticated() {
@@ -42,9 +42,9 @@ const router = createRouter({
           component: OrdersPage
         },
         {
-          path: 'finance',
-          name: 'Finance',
-          component: FinancePage
+          path: 'clients',
+          name: 'Clients',
+          component: ClientsPage
         },
         {
           path: '',
@@ -57,7 +57,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const authRequiredRoutes = ['Dashboard', 'Orders', 'Finance'];
+  const authRequiredRoutes = ['Dashboard', 'Orders', 'Clients'];
 
   if (authRequiredRoutes.includes(to.name) && !isAuthenticated()) {
     next({ path: '/auth/login' });

@@ -24,7 +24,7 @@ export async function fetchOrders(params = {}) {
     }
   })
 
-  const url = `${API_BASE_URL}/orders${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+  const url = `${API_BASE_URL}/parcels${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
 
   const response = await fetch(url, {
     method: 'GET',
@@ -54,7 +54,7 @@ export async function updateOrderStatus(orderIds, status) {
     throw new Error('No authentication token found')
   }
 
-  const response = await fetch(`${API_BASE_URL}/orders/status`, {
+  const response = await fetch(`${API_BASE_URL}/parcels/status`, {
     method: 'PUT',
     headers: {
       'Authorization': `Bearer ${token}`,

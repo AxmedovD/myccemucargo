@@ -6,7 +6,6 @@ import { useRouter } from 'vue-router'
 const user = ref(null)
 const loading = ref(false)
 const error = ref(null)
-const userStore = ref(null)
 
 export function useUser() {
   const router = useRouter()
@@ -15,7 +14,6 @@ export function useUser() {
     user.value = null
     loading.value = false
     error.value = null
-    userStore.value = null
     localStorage.removeItem('authToken')
   }
 
@@ -25,7 +23,6 @@ export function useUser() {
       error.value = null
       const response = await getUserProfile()
       user.value = response
-      userStore.value = response.store
     } catch (err) {
       error.value = 'Failed to load user profile'
       console.error('Error fetching user:', err)
@@ -47,7 +44,6 @@ export function useUser() {
     user,
     loading,
     error,
-    userStore,
     fetchUser,
     logout,
     clearUserData

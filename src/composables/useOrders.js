@@ -104,7 +104,6 @@ export function useOrders() {
   }
 
   return {
-    // State
     orders,
     selectedOrders,
     selectedStatus,
@@ -117,8 +116,6 @@ export function useOrders() {
     statusCounts,
     activeFilters,
     filteredOrders,
-    
-    // Methods
     fetchOrders,
     handleFilterReset,
     handleFilterApply,

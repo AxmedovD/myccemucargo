@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://api.mycpa.uz/api'
+export const API_BASE_URL = 'https://api.emucargo.ru/api'
