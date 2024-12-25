@@ -1,7 +1,9 @@
 export const formatPrice = (price) => {
-  return new Intl.NumberFormat('uz-UZ', {
+  return new Intl.NumberFormat('de-DE', {
     style: 'currency',
-    currency: 'UZS'
+    currency: 'UZS',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
   }).format(price)
 }
 
