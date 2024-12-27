@@ -24,19 +24,24 @@ export async function makeAuthenticatedRequest(url, options = {}) {
       }
       
       if (response.status === 422 && data.errors) {
-        const error = new Error('Validation failed')
-        error.validation = data.errors
-        throw error
+        const validationError = new Error('Validation failed')
+        validationError.validation = data.errors
+        throw validationError
       }
       
       throw new Error(data.message || 'Request failed')
     }
 
-    return data
-  } catch (error) {
-    if (!error.validation) {
-      console.error('API Error:', error)
+    return {
+      data: data.data || [],
+      pagination: data.pagination || { last_page: 1 },
+      meta: data.meta || {}
     }
+  } catch (error) {
+    console.error('API Error:', {
+      message: error.message,
+      validation: error.validation
+    })
     throw error
   }
 }

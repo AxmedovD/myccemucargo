@@ -14,7 +14,7 @@ export async function searchClients(params = {}) {
 }
 
 export async function createClient(data) {
-  return makeAuthenticatedRequest(`${API_BASE_URL}/clients`, {
+  return makeAuthenticatedRequest(`${API_BASE_URL}/clients/add`, {
     method: 'POST',
     body: JSON.stringify(data)
   })

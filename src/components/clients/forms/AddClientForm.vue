@@ -8,7 +8,7 @@
         label="Company Name"
         v-model="form.name"
         placeholder="Enter company name"
-        :error="errors.name"
+        :error="errors.name?.[0]"
         required
       />
 
@@ -17,7 +17,7 @@
         label="Contact Person"
         v-model="form.contact"
         placeholder="Enter contact person name"
-        :error="errors.contact"
+        :error="errors.contact?.[0]"
         required
       />
     </div>
@@ -32,7 +32,7 @@
             label="Country"
             v-model="form.country_code"
             placeholder="US"
-            :error="errors.country_code"
+            :error="errors.country_code?.[0]"
             maxlength="2"
             class="uppercase"
             required
@@ -44,7 +44,7 @@
             label="Address"
             v-model="form.address"
             placeholder="Enter full address"
-            :error="errors.address"
+            :error="errors.address?.[0]"
             required
           />
         </div>
@@ -59,7 +59,7 @@
         label="Website URL"
         v-model="form.url"
         placeholder="https://example.com"
-        :error="errors.url"
+        :error="errors.url?.[0]"
         helper="Enter the full URL including https://"
         required
       />
@@ -69,7 +69,7 @@
         label="Webhook URL (Optional)"
         v-model="form.webhook"
         placeholder="https://example.com/webhook"
-        :error="errors.webhook"
+        :error="errors.webhook?.[0]"
         helper="URL for receiving webhook notifications"
       />
     </div>
@@ -112,14 +112,6 @@ const emptyForm = {
   webhook: ''
 }
 
-const props = defineProps({
-  loading: Boolean,
-  errors: {
-    type: Object,
-    default: () => ({})
-  }
-})
-
 const emit = defineEmits(['created', 'cancel'])
 const { showNotification } = useNotification()
 
@@ -132,14 +124,15 @@ const handleSubmit = async () => {
     loading.value = true
     errors.value = {}
     form.value.country_code = form.value.country_code.toUpperCase()
-    await createClient(form.value)
+    
+    const response = await createClient(form.value)
     showNotification('Client created successfully', 'success')
     emit('created')
   } catch (error) {
     if (error.validation) {
       errors.value = error.validation
     } else {
-      showNotification(error.message, 'error')
+      showNotification(error.message || 'Failed to create client', 'error')
     }
   } finally {
     loading.value = false

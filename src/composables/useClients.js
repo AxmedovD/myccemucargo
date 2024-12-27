@@ -13,12 +13,12 @@ export function useClients() {
     try {
       loading.value = true
       error.value = null
-      const response = await getClients({
+      const { data, pagination } = await getClients({
         page: currentPage.value,
         per_page: perPage.value
       })
-      clients.value = response.data
-      totalPages.value = response.pagination.last_page
+      clients.value = data
+      totalPages.value = pagination.last_page
     } catch (err) {
       error.value = err.message
       clients.value = []
@@ -35,13 +35,13 @@ export function useClients() {
     try {
       loading.value = true
       error.value = null
-      const response = await searchClientsApi({
+      const { data, pagination } = await searchClientsApi({
         q: query.trim(),
         page: currentPage.value,
         per_page: perPage.value
       })
-      clients.value = response.data
-      totalPages.value = response.pagination.last_page
+      clients.value = data
+      totalPages.value = pagination.last_page
     } catch (err) {
       error.value = err.message
       clients.value = []

@@ -1,15 +1,20 @@
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <!-- Responsive Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
       <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Clients</h1>
-      <div class="flex items-center space-x-4">
+      <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
         <ClientsSearch 
           v-model="searchQuery" 
           :disabled="loading"
-          class="w-[300px]"
+          class="w-full sm:w-[300px]"
           @search="handleSearch"
         />
-        <Button variant="primary" @click="showCreateModal = true">
+        <Button 
+          variant="primary" 
+          @click="showCreateModal = true"
+          class="w-full sm:w-auto whitespace-nowrap"
+        >
           + Add Client
         </Button>
       </div>
