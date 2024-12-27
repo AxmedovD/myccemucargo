@@ -10,11 +10,18 @@ export function useCourierStats() {
     try {
       loading.value = true
       error.value = null
-      const response = await fetchCourierStats()
-      stats.value = response.data
+      const { data, error: apiError } = await fetchCourierStats()
+      
+      if (apiError) {
+        error.value = apiError
+        stats.value = []
+        return
+      }
+
+      stats.value = data
     } catch (err) {
-      error.value = err.message
-      console.error('Error fetching courier stats:', err)
+      error.value = err.message || 'Failed to fetch courier stats'
+      stats.value = []
     } finally {
       loading.value = false
     }
